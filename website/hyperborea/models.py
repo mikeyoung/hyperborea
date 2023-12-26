@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Spell(models.Model):
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True, unique=True)
     description = models.TextField(null=True)
     saving_throw = models.CharField(max_length=2000, default="None", null=True)
     duration = models.CharField(max_length=200, null=True)
@@ -14,7 +14,7 @@ class Spell(models.Model):
         return self.name
 
 class CharacterClass(models.Model):
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True,  unique=True)
 
     def __str__(self):
         return self.name
