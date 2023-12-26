@@ -7,7 +7,6 @@ class Spell(models.Model):
     saving_throw = models.CharField(max_length=2000, default="None", null=True)
     duration = models.CharField(max_length=200, null=True)
     range = models.CharField(max_length=200, null=True)
-    reversible = models.BooleanField(default=False, null=True)
     page = models.PositiveIntegerField(validators=[MinValueValidator(175), MaxValueValidator(247)],null=True)
 
     def __str__(self):
