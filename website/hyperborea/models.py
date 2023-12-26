@@ -8,6 +8,7 @@ class Spell(models.Model):
     duration = models.CharField(max_length=200, null=True)
     range = models.CharField(max_length=200, null=True)
     reversible = models.BooleanField(default=False, null=True)
+    page = models.PositiveIntegerField(validators=[MinValueValidator(175), MaxValueValidator(247)],null=True)
 
     def __str__(self):
         return self.name

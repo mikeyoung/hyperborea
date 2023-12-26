@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from .models import Spell
 
 def spells(request):
-    return render(request, "hyperborea/spells.html")
+    spells = Spell.objects.all()
+
+    return render(request, "hyperborea/spells.html", {
+        'spells': spells
+    })
