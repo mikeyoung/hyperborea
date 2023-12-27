@@ -8,3 +8,7 @@ body {
 body p {
     color: #000;
 }
+
+td, th {
+    vertical-align: top;
+}
