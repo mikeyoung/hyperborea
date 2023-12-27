@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from .models import Spell
+from .models import CharacterClass, Spell, SpellListItem
 import json
 from django.contrib.auth.decorators import login_required
 import os
@@ -31,10 +31,26 @@ def spells(request):
 
 @login_required
 def create_json(request):
-    spells = Spell.objects.all()
-    file_path = os.path.join(BASE_DIR, 'hyperborea/static/hyperborea/json/spells.json')
+    try: 
+        spells = Spell.objects.all()
+        file_path = os.path.join(BASE_DIR, 'hyperborea/static/hyperborea/json/spells.json')
 
-    with open(file_path, 'w') as file:
-        json.dump(list(spells.values()), file)
+        with open(file_path, 'w') as file:
+            json.dump(list(spells.values()), file)
 
-    return JsonResponse(list(spells.values()), status=201, safe=False)
+        classes = CharacterClass.objects.all()
+        file_path = os.path.join(BASE_DIR, 'hyperborea/static/hyperborea/json/character_classes.json')
+
+        with open(file_path, 'w') as file:
+            json.dump(list(classes.values()), file)
+
+        spell_list_items = SpellListItem.objects.all()
+        file_path = os.path.join(BASE_DIR, 'hyperborea/static/hyperborea/json/spell_list_itemss.json')
+
+        with open(file_path, 'w') as file:
+            json.dump(list(spell_list_items.values()), file)
+
+        return JsonResponse({"success": True}, status=201)
+    
+    except:
+        return JsonResponse({"success": False}, status=500)
