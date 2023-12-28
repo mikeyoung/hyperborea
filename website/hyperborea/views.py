@@ -29,6 +29,9 @@ def spells(request):
         return render(request, "hyperborea/spells.html", {
             'spells': spells
         })
+    
+def get_spells(request):
+    pass
 
 @login_required
 def create_json(request):

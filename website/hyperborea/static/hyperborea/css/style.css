@@ -1,15 +1,18 @@
 body {
     background-color: #b7f5e5;
-    /* color: #000; */
-    color: #f00;
+    color: #000;
     font-family: 'Special Elite', serif;
+    font-size: 18px;
 }
 
 body p {
-    color: #000;
     margin-top: 0;
 }
 
 td, th {
     vertical-align: top;
+}
+
+.page-header {
+    margin: 15px 0;
 }
