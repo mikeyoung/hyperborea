@@ -23,5 +23,10 @@ class SpellListItem(models.Model):
     character_class = models.ForeignKey(CharacterClass, on_delete=models.CASCADE, related_name="character_class_spell_list_item", null=True)
     spell = models.ForeignKey(Spell, on_delete=models.CASCADE, related_name="spell_spell_list_item", null=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['level', 'character_class', 'spell'], name='unique_level_character_class_spell')
+        ]
+
     def __str__(self):
         return f"{self.character_class} {self.level} {self.spell.name}"
