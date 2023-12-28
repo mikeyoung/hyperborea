@@ -1,10 +1,11 @@
-from django.http import JsonResponse
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render
 from .models import Spell
 import json
 from django.contrib.auth.decorators import login_required
 import os
 from website.settings import BASE_DIR
+from django.db.models import Q
 
 def spells(request):
     filter_by = request.GET.get("filter_by")
@@ -31,7 +32,20 @@ def spells(request):
         })
     
 def get_spells(request):
-    pass
+    if request.method != "POST":
+        return HttpResponseBadRequest()
+    
+    q_objects = Q()
+
+    character_class = request.POST.get("class")
+    spell_level = request.POST.get("level")
+    
+    spells = Spell.objects.all()
+    
+    return render(request, "hyperborea/spells.html", {
+        'spells': spells
+    })
+
 
 @login_required
 def create_json(request):
