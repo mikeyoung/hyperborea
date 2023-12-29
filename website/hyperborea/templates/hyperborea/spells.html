@@ -1,6 +1,6 @@
 {% extends 'hyperborea/layout.html' %}
 
-{% block title %}Spells of Hyperborea{% endblock %}
+{% block title %}{{ page_title }}{% endblock %}
 
 {% load static %}
 
@@ -55,21 +55,21 @@
     {% endif %}
 
     <uL class='spell-list text-center'>
-        {% for spell in spell_list %}
+        {% for spell_list_item in spell_list %}
             {% if selected_character_class == 'all' and selected_level == 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }} ({{spell.character_class|capfirst}} Level {{spell.level}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }} ({{spell_list_item.character_class|capfirst}} Level {{spell_list_item.level}})</a></li>
             {% endif %}
             
             {% if selected_character_class == 'all' and selected_level != 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }} ({{spell.character_class|capfirst}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }} ({{spell_list_item.character_class|capfirst}})</a></li>
             {% endif %}
             
             {% if selected_character_class != 'all' and selected_level == 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }} (Level {{spell.level}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }} (Level {{spell_list_item.level}})</a></li>
             {% endif %}
 
             {% if selected_character_class != 'all' and selected_level != 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }}</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}</a></li>
             {% endif %}
         {% endfor %}
     </uL>

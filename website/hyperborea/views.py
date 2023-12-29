@@ -5,7 +5,7 @@ import json
 from django.contrib.auth.decorators import login_required
 import os
 from website.settings import BASE_DIR
-from django.db.models import Q
+
 
 def spells(request):
     character_class = 'all'
@@ -27,13 +27,24 @@ def spells(request):
 
     if character_class == 'all' and spell_level == 'all':
         spell_list = spell_list.distinct()
+    
+    page_title = "All Spells of The Realm"
+
+    if character_class == 'all' and spell_level != 'all':
+        page_title = f'All Level {spell_level} Spells'
+    elif character_class != 'all' and spell_level == 'all':
+        page_title = f'All { str(character_class).capitalize() } Spells'
+    elif character_class != 'all' and spell_level != 'all':
+        page_title = f'All Level { spell_level } { str(character_class).capitalize() } Spells'
+
 
     return render(request, 'hyperborea/spells.html', {
         'spell_list': spell_list,
         'class_list': class_list,
         'levels': ['1','2','3'],
         'selected_character_class': character_class,
-        'selected_level': spell_level
+        'selected_level': spell_level,
+        'page_title': page_title,
     })
 
 def get_spell_description(request):
