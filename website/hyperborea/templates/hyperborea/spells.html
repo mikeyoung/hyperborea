@@ -5,32 +5,32 @@
 {% load static %}
 
 {% block body %}
-<h1 class="text-center page-header">Spells of Hyperborea</h1>
-<div class="container">
-    <form action="/" method="get" id="spell-form">
-        <div class="row">
-            <div class="col-12 col-sm-6 text-center">
-                <label for="class">Class:</label><br>
-                <select name="class" id="class">
-                    <option value="all">All Classes</option>
+<h1 class='text-center page-header'>Spells of Hyperborea</h1>
+<div class='container'>
+    <form action='/' method='get' id='spell-form'>
+        <div class='row'>
+            <div class='col-12 col-sm-6 text-center'>
+                <label for='class'>Class:</label><br>
+                <select name='class' id='class'>
+                    <option value='all'>All Classes</option>
                     {% for class in class_list %}
                         {% if selected_character_class.name == class.name %}
-                            <option value="{{class.pk}}" selected="selected">{{class.name|capfirst}}</option>
+                            <option value='{{class.pk}}' selected='selected'>{{class.name|capfirst}}</option>
                         {% else %}
-                            <option value="{{class.pk}}">{{class.name|capfirst}}</option>
+                            <option value='{{class.pk}}'>{{class.name|capfirst}}</option>
                         {% endif %}
                     {% endfor %}
                 </select>
             </div> 
-            <div class="col-12 col-sm-6 text-center">
-                <label for="level">Level:</label><br>
-                <select name="level" id="level">
-                    <option value="all">All Levels</option>
+            <div class='col-12 col-sm-6 text-center'>
+                <label for='level'>Level:</label><br>
+                <select name='level' id='level'>
+                    <option value='all'>All Levels</option>
                     {% for level in levels %}
                         {% if selected_level == level %}
-                            <option value="{{level}}" selected="selected">{{level}}</option>
+                            <option value='{{level}}' selected='selected'>{{level}}</option>
                         {% else %}
-                            <option value="{{level}}">{{level}}</option>
+                            <option value='{{level}}'>{{level}}</option>
                         {% endif %}
                    {% endfor %}
                 </select>
@@ -54,32 +54,44 @@
        <h3>All Level {{ selected_level }} {{ selected_character_class|capfirst }} Spells</h3>
     {% endif %}
 
-    <uL class="spell-list text-center">
+    <uL class='spell-list text-center'>
         {% for spell in spell_list %}
             {% if selected_character_class == 'all' and selected_level == 'all' %}
-               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }} ({{spell.character_class|capfirst}} Level {{spell.level}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }} ({{spell.character_class|capfirst}} Level {{spell.level}})</a></li>
             {% endif %}
             
             {% if selected_character_class == 'all' and selected_level != 'all' %}
-               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }} ({{spell.character_class|capfirst}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }} ({{spell.character_class|capfirst}})</a></li>
             {% endif %}
             
             {% if selected_character_class != 'all' and selected_level == 'all' %}
-               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }} (Level {{spell.level}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }} (Level {{spell.level}})</a></li>
             {% endif %}
 
             {% if selected_character_class != 'all' and selected_level != 'all' %}
-               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }}</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell.pk}}'>{{ spell.spell_name }}</a></li>
             {% endif %}
         {% endfor %}
     </uL>
 </div>
 
-<!-- level = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(6)],null=True)
-character_class = models.ForeignKey(CharacterClass, on_delete=models.CASCADE, related_name="character_class_spell_list_item", null=True)
-spell = models.ForeignKey(Spell, on_delete=models.CASCADE, related_name="spell_spell_list_item", null=True) -->
+<div class='modal fade' tabindex='-1' id='spell_modal'>
+    <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h5 class='modal-title'></h5>
+          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+        </div>
+        <div class='modal-body'></div>
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
 
 
-<script src="{% static 'hyperborea/script/main.js' %}" defer></script>
+<script src='{% static 'hyperborea/script/main.js' %}' defer></script>
 {% endblock %}
