@@ -28,13 +28,34 @@ def spells(request):
     if character_class == 'all' and spell_level == 'all':
         spell_list = spell_list.distinct()
 
-    return render(request, "hyperborea/spells.html", {
+    return render(request, 'hyperborea/spells.html', {
         'spell_list': spell_list,
         'class_list': class_list,
         'levels': ['1','2','3'],
         'selected_character_class': character_class,
         'selected_level': spell_level
     })
+
+def get_spell_description(request):
+    if request.method != 'POST':
+        return HttpResponseBadRequest()
+    
+    data = json.loads(request.body)
+    
+    spell_id = data.get('spell_id')
+
+    if spell_id == None:
+        return HttpResponseBadRequest()
+    
+    spell = Spell.objects.get(pk=spell_id)
+    spell_name = spell.name
+    spell_description = spell.description
+        
+    return JsonResponse({
+        'success': True,
+        'spell_name': spell_name,
+        'spell_description': spell_description
+    }, status=201)
 
 
 @login_required
@@ -58,7 +79,7 @@ def create_json(request):
         with open(file_path, 'w') as file:
             json.dump(list(spell_list_items.values()), file)
 
-        return JsonResponse({"success": True}, status=201)
+        return JsonResponse({'success': True}, status=201)
     
     except:
-        return JsonResponse({"success": False}, status=500)
+        return JsonResponse({'success': False}, status=500)

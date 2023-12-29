@@ -54,8 +54,6 @@
        <h3>All Level {{ selected_level }} {{ selected_character_class|capfirst }} Spells</h3>
     {% endif %}
 
-
-
     <uL class="spell-list text-center">
         {% for spell in spell_list %}
             {% if selected_character_class == 'all' and selected_level == 'all' %}
