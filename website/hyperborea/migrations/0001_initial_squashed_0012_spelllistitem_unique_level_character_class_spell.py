@@ -7,6 +7,8 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
+    replaces = [('hyperborea', '0001_initial'), ('hyperborea', '0002_alter_characterclass_name'), ('hyperborea', '0003_alter_spell_saving_throw'), ('hyperborea', '0004_spell_reversible'), ('hyperborea', '0005_spell_page'), ('hyperborea', '0006_alter_characterclass_name_alter_spell_name'), ('hyperborea', '0007_remove_spell_reversible'), ('hyperborea', '0008_characterclass_spelllistitem'), ('hyperborea', '0009_remove_spelllistitem_character_class_and_more'), ('hyperborea', '0010_spell_cleric_level_spell_cryomancer_level_and_more'), ('hyperborea', '0011_characterclass_remove_spell_cleric_level_and_more'), ('hyperborea', '0012_spelllistitem_unique_level_character_class_spell')]
+
     dependencies = [
     ]
 
