@@ -16,3 +16,8 @@ td, th {
 .page-header {
     margin: 15px 0;
 }
+
+.spell-list {
+    list-style-type: none;
+    padding: 15px 0;
+}

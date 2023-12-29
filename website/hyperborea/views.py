@@ -8,51 +8,46 @@ from website.settings import BASE_DIR
 from django.db.models import Q
 
 def spells(request):
-    filter_by = request.GET.get("filter_by")
-    render_as = request.GET.get("render_as")
+    character_class = None
+    spell_level = None
 
-    spells = None
+    value_rules = {}
+
+    if request.method == "POST":
+        if request.POST.get('class') != 'all':
+            character_class = CharacterClass.objects.get(pk=int(request.POST.get('class')))
+            value_rules['character_class'] = character_class
+        if request.POST.get('level') != 'all':
+            spell_level = request.POST.get('level')
+            value_rules['level'] = spell_level
+    else:
+        character_class = 'all'
+        spell_level = 'all'
+
+    spell_list = None
+
     class_list = CharacterClass.objects.all()
 
-    if filter_by != None:
-        match filter_by:
-            case "lists":
-                spells = Spell.objects.filter(description__icontains='<uL>')
-            case "dash":
-                spells = Spell.objects.filter(description__icontains='-')
-            case "missing_class":
-                spells = Spell.objects.filter(magician_level=0, cryomancer_level=0, illusionist_level=0, necromancer_level=0, pyromancer_level=0, witch_level=0, cleric_level=0, druid_level=0)
-    else:
-        spells = Spell.objects.all()
+    spell_list = SpellListItem.objects.filter(**value_rules)
 
-    if render_as == "json":
-        return JsonResponse(list(spells.values()), status=201, safe=False)
-    else:
-        return render(request, "hyperborea/spells.html", {
-            'spells': spells,
-            'class_list': class_list,
-            'levels': range(1,7)
-        })
+    # q_objects = Q()
+
+    # if character_class != 'all':
+    #     q_objects.add(Q(character_class=character_class), Q.AND)
     
-def get_spells(request):
-    if request.method != "POST":
-        return HttpResponseBadRequest()
-
-    char_class = request.POST.get("class")
-    spell_level = request.POST.get("level")
-
-    q_objects = Q()
-
-    if char_class != 'all':
-        q_objects.add(Q(character_class=char_class), Q.AND)
+    # if spell_level != 'all':
+    #     q_objects.add(Q(level=spell_level), Q.AND)
     
-    if spell_level != 'all':
-        q_objects.add(Q(level=spell_level), Q.AND)
-    
-    spells = SpellListItem.objects.filter(q_objects)
+    # spell_list = SpellListItem.objects.filter(q_objects)
+
+
     
     return render(request, "hyperborea/spells.html", {
-        'spells': spells
+        'spell_list': spell_list,
+        'class_list': class_list,
+        'levels': ['1','2','3'],
+        'selected_character_class': character_class,
+        'selected_level': spell_level
     })
 
 

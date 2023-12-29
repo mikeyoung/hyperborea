@@ -7,7 +7,7 @@
 {% block body %}
 <div class="container">
     <h1 class="text-center page-header">Spells of Hyperborea</h1>
-    <form action="get-spells" method="post" id="spell-form">
+    <form action="/" method="post" id="spell-form">
         {% csrf_token %}
         <div class="row">
             <div class="col-12 col-sm-4 text-center">
@@ -21,55 +21,42 @@
                 <label for="class">Class:</label><br>
                 <select name="class" id="class">
                     <option value="all">All Classes</option>
-
                     {% for class in class_list %}
-                        <option value="{{class.name}}">{{class.name}}</option>
+                        {% if selected_character_class.name == class.name %}
+                            <option value="{{class.pk}}" selected="selected">{{class.name}}</option>
+                        {% else %}
+                            <option value="{{class.pk}}">{{class.name}}</option>
+                        {% endif %}
                     {% endfor %}
-
                 </select>
             </div> 
             <div class="col-12 col-sm-4 text-center">
                 <label for="level">Level:</label><br>
                 <select name="level" id="level">
                     <option value="all">All Levels</option>
-
                     {% for level in levels %}
-                        <option value="{{level}}">{{level}}</option>
-                    {% endfor %}
+                        {% if selected_level == level %}
+                            <option value="{{level}}" selected="selected">{{level}}</option>
+                        {% else %}
+                            <option value="{{level}}">{{level}}</option>
+                        {% endif %}
+                   {% endfor %}
                 </select>
             </div>   
         </div>
     </form>
-</div>
-<script src="{% static 'hyperborea/script/main.js' %}" defer></script>
-
-
-
-
-<!--
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Range</th>
-            <th>Duration</th>
-            <th>Saving Throw</th>
-            <th>Page</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for spell in spells %}
-            <tr>
-                <td>{{ spell.name }}</td>
-                <td>{{ spell.description|safe }}</td>
-                <td>{{ spell.range }}</td>
-                <td>{{ spell.duration }}</td>
-                <td>{{ spell.saving_throw }}</td>
-                <td>{{ spell.page }}</td>
-            </tr>
+    <uL class="spell-list text-center">
+        {% for spell in spell_list %}
+            <li>{{ spell.spell_name }}</li>
         {% endfor %}
-    </tbody>
-</table>
--->
+    </uL>
+</div>
+
+<!-- level = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(6)],null=True)
+character_class = models.ForeignKey(CharacterClass, on_delete=models.CASCADE, related_name="character_class_spell_list_item", null=True)
+spell = models.ForeignKey(Spell, on_delete=models.CASCADE, related_name="spell_spell_list_item", null=True) -->
+
+
+
+<script src="{% static 'hyperborea/script/main.js' %}" defer></script>
 {% endblock %}
