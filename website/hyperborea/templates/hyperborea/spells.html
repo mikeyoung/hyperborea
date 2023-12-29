@@ -7,8 +7,7 @@
 {% block body %}
 <h1 class="text-center page-header">Spells of Hyperborea</h1>
 <div class="container">
-    <form action="/" method="post" id="spell-form">
-        {% csrf_token %}
+    <form action="/" method="get" id="spell-form">
         <div class="row">
             <div class="col-12 col-sm-6 text-center">
                 <label for="class">Class:</label><br>
@@ -60,19 +59,19 @@
     <uL class="spell-list text-center">
         {% for spell in spell_list %}
             {% if selected_character_class == 'all' and selected_level == 'all' %}
-               <li>{{ spell.spell_name }} ({{spell.character_class|capfirst}} Level {{spell.level}})</li>
+               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }} ({{spell.character_class|capfirst}} Level {{spell.level}})</a></li>
             {% endif %}
             
             {% if selected_character_class == 'all' and selected_level != 'all' %}
-               <li>{{ spell.spell_name }} ({{spell.character_class|capfirst}})</li>
+               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }} ({{spell.character_class|capfirst}})</a></li>
             {% endif %}
             
             {% if selected_character_class != 'all' and selected_level == 'all' %}
-               <li>{{ spell.spell_name }} (Level {{spell.level}})</li>
+               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }} (Level {{spell.level}})</a></li>
             {% endif %}
 
             {% if selected_character_class != 'all' and selected_level != 'all' %}
-               <li>{{ spell.spell_name }}</li>
+               <li><a href="javascript:void(0)" data-spell_id="{{spell.pk}}">{{ spell.spell_name }}</a></li>
             {% endif %}
         {% endfor %}
     </uL>

@@ -11,14 +11,15 @@ def spells(request):
     character_class = 'all'
     spell_level = 'all'
     value_rules = {}
+    submitted_class = request.GET.get('class')
+    submitted_level = request.GET.get('level')
 
-    if request.method == "POST":
-        if request.POST.get('class') != 'all':
-            character_class = CharacterClass.objects.get(pk=int(request.POST.get('class')))
-            value_rules['character_class'] = character_class
-        if request.POST.get('level') != 'all':
-            spell_level = request.POST.get('level')
-            value_rules['level'] = spell_level
+    if submitted_class != 'all' and submitted_class != None:
+        character_class = CharacterClass.objects.get(pk=int(request.GET.get('class')))
+        value_rules['character_class'] = character_class
+    if submitted_level != 'all' and submitted_level != None:
+        spell_level = request.GET.get('level')
+        value_rules['level'] = spell_level
 
     class_list = CharacterClass.objects.all()
 
