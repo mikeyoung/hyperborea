@@ -43,3 +43,7 @@ h3 {
 select {
     text-align: center;
 }
+
+#spell_modal .modal-content {
+    background-color: #F8F5E1;
+}
