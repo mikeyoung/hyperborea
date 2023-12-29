@@ -12,6 +12,7 @@ def spells(request):
     render_as = request.GET.get("render_as")
 
     spells = None
+    class_list = CharacterClass.objects.all()
 
     if filter_by != None:
         match filter_by:
@@ -28,19 +29,27 @@ def spells(request):
         return JsonResponse(list(spells.values()), status=201, safe=False)
     else:
         return render(request, "hyperborea/spells.html", {
-            'spells': spells
+            'spells': spells,
+            'class_list': class_list,
+            'levels': range(1,7)
         })
     
 def get_spells(request):
     if request.method != "POST":
         return HttpResponseBadRequest()
-    
-    # q_objects = Q()
 
-    character_class = request.POST.get("class")
+    char_class = request.POST.get("class")
     spell_level = request.POST.get("level")
+
+    q_objects = Q()
+
+    if char_class != 'all':
+        q_objects.add(Q(character_class=char_class), Q.AND)
     
-    spells = Spell.objects.all()
+    if spell_level != 'all':
+        q_objects.add(Q(level=spell_level), Q.AND)
+    
+    spells = SpellListItem.objects.filter(q_objects)
     
     return render(request, "hyperborea/spells.html", {
         'spells': spells

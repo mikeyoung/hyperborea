@@ -21,26 +21,21 @@
                 <label for="class">Class:</label><br>
                 <select name="class" id="class">
                     <option value="all">All Classes</option>
-                    <option value="magician">Magician</option>
-                    <option value="cryomancer">Cryomancer</option>
-                    <option value="illusionist">Illusionist</option>
-                    <option value="necromancer">Necromancer</option>
-                    <option value="pyromancer">Pyromancer</option>
-                    <option value="witch">Witch</option>
-                    <option value="cleric">Cleric</option>
-                    <option value="druid">Druid</option>
+
+                    {% for class in class_list %}
+                        <option value="{{class.name}}">{{class.name}}</option>
+                    {% endfor %}
+
                 </select>
             </div> 
             <div class="col-12 col-sm-4 text-center">
                 <label for="level">Level:</label><br>
                 <select name="level" id="level">
                     <option value="all">All Levels</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
+
+                    {% for level in levels %}
+                        <option value="{{level}}">{{level}}</option>
+                    {% endfor %}
                 </select>
             </div>   
         </div>
