@@ -8,9 +8,8 @@ from website.settings import BASE_DIR
 from django.db.models import Q
 
 def spells(request):
-    character_class = None
-    spell_level = None
-
+    character_class = 'all'
+    spell_level = 'all'
     value_rules = {}
 
     if request.method == "POST":
@@ -20,28 +19,14 @@ def spells(request):
         if request.POST.get('level') != 'all':
             spell_level = request.POST.get('level')
             value_rules['level'] = spell_level
-    else:
-        character_class = 'all'
-        spell_level = 'all'
-
-    spell_list = None
 
     class_list = CharacterClass.objects.all()
 
-    spell_list = SpellListItem.objects.filter(**value_rules)
+    spell_list = SpellListItem.objects.filter(**value_rules).order_by('spell')
 
-    # q_objects = Q()
+    if character_class == 'all' and spell_level == 'all':
+        spell_list = spell_list.distinct()
 
-    # if character_class != 'all':
-    #     q_objects.add(Q(character_class=character_class), Q.AND)
-    
-    # if spell_level != 'all':
-    #     q_objects.add(Q(level=spell_level), Q.AND)
-    
-    # spell_list = SpellListItem.objects.filter(q_objects)
-
-
-    
     return render(request, "hyperborea/spells.html", {
         'spell_list': spell_list,
         'class_list': class_list,

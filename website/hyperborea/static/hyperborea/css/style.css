@@ -14,10 +14,18 @@ td, th {
 }
 
 .page-header {
-    margin: 15px 0;
+    margin: 0 0 15px 0;
+    padding: 15px;
+    background-color: #000;
+    color: #b7f5e5;
 }
 
 .spell-list {
     list-style-type: none;
-    padding: 15px 0;
+    margin: 15px 0;
+}
+
+h3 {
+    text-align: center;
+    margin: 15px 0;
 }
