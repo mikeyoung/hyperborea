@@ -38,34 +38,20 @@
         </div>
     </form>
 
-    {% if selected_character_class == 'all' and selected_level == 'all' %}
-       <h3>All Known Spells of the Realm</h3>
-    {% endif %}
-    
-    {% if selected_character_class == 'all' and selected_level != 'all' %}
-       <h3>All Level {{ selected_level }} Spells</h3>
-    {% endif %}
-    
-    {% if selected_character_class != 'all' and selected_level == 'all' %}
-       <h3>All {{ selected_character_class|capfirst }} Spells</h3>
-    {% endif %}
-
-    {% if selected_character_class != 'all' and selected_level != 'all' %}
-       <h3>All Level {{ selected_level }} {{ selected_character_class|capfirst }} Spells</h3>
-    {% endif %}
+    <h3>{{ page_title }}</h3>
 
     <uL class='spell-list text-center'>
         {% for spell_list_item in spell_list %}
             {% if selected_character_class == 'all' and selected_level == 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }} ({{spell_list_item.character_class|capfirst}} Level {{spell_list_item.level}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}<br>({{spell_list_item.character_class|capfirst}} Level {{spell_list_item.level}})</a></li>
             {% endif %}
             
             {% if selected_character_class == 'all' and selected_level != 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }} ({{spell_list_item.character_class|capfirst}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}<br>({{spell_list_item.character_class|capfirst}})</a></li>
             {% endif %}
             
             {% if selected_character_class != 'all' and selected_level == 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }} (Level {{spell_list_item.level}})</a></li>
+               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}<br>(Level {{spell_list_item.level}})</a></li>
             {% endif %}
 
             {% if selected_character_class != 'all' and selected_level != 'all' %}
@@ -83,6 +69,9 @@
           <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
         </div>
         <div class='modal-body'></div>
+        <div class='spellbook-toggle-container'>
+            <a href='javascript:void(0)' class="btn btn-secondary" id='spellbook-toggle-link' data-spell_id=''></a>
+        </div>
         <div class='modal-footer'>
           <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
         </div>

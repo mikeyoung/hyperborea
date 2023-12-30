@@ -1,8 +1,13 @@
 body {
     background-color: #b7f5e5;
-    color: #000;
+    color: #000 !important;
     font-family: 'Special Elite', serif;
     font-size: 18px;
+}
+
+a {
+    color: #000 !important;
+    text-decoration: none !important;
 }
 
 body p {
@@ -30,9 +35,14 @@ td, th {
     margin: 15px 0;
 }
 
-.spell-list a {
-    text-decoration: none !important;
-    color: #000 !important;
+.spellbook-toggle-container {
+    text-align: center;
+    padding: 0 0 15px 0;
+}
+
+.spellbook-toggle-container a {
+    font-size: 14px;
+    color: #fff !important;
 }
 
 h3 {
