@@ -5,11 +5,18 @@
 {% load static %}
 
 {% block body %}
-<h1 class='text-center page-header'>Spells of Hyperborea</h1>
 <div class='container'>
-    <form action='/' method='get' id='spell-form'>
+    <form action='/' method='post' id='spell-form'>
+        {% csrf_token %}
         <div class='row'>
-            <div class='col-12 col-sm-6 text-center'>
+            <div class='col-12 col-sm-4 text-center'>
+                <label for='class'>Scope:</label><br>
+                <select name='scope' id='scope'>
+                    <option value='all'>All Spells</option>
+                    <option value='spellbook'>Spellbook</option>
+                </select>
+            </div> 
+            <div class='col-12 col-sm-4 text-center'>
                 <label for='class'>Class:</label><br>
                 <select name='class' id='class'>
                     <option value='all'>All Classes</option>
@@ -22,7 +29,7 @@
                     {% endfor %}
                 </select>
             </div> 
-            <div class='col-12 col-sm-6 text-center'>
+            <div class='col-12 col-sm-4 text-center'>
                 <label for='level'>Level:</label><br>
                 <select name='level' id='level'>
                     <option value='all'>All Levels</option>
@@ -60,24 +67,4 @@
         {% endfor %}
     </uL>
 </div>
-
-<div class='modal fade' tabindex='-1' id='spell_modal'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h5 class='modal-title'></h5>
-          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-        </div>
-        <div class='modal-body'></div>
-        <div class='spellbook-toggle-container'>
-            <a href='javascript:void(0)' class="btn btn-secondary" id='spellbook-toggle-link' data-spell_id=''></a>
-        </div>
-        <div class='modal-footer'>
-          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-<script src='{% static 'hyperborea/script/main.js' %}' defer></script>
 {% endblock %}

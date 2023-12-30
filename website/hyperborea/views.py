@@ -11,14 +11,16 @@ def spells(request):
     character_class = 'all'
     spell_level = 'all'
     value_rules = {}
-    submitted_class = request.GET.get('class')
-    submitted_level = request.GET.get('level')
+    spellbook_spells = []
+    submitted_class = request.POST.get('class')
+    submitted_level = request.POST.get('level')
+    submitted_scope = request.POST.get('scope')
 
     if submitted_class != 'all' and submitted_class != None:
-        character_class = CharacterClass.objects.get(pk=int(request.GET.get('class')))
+        character_class = CharacterClass.objects.get(pk=int(submitted_class))
         value_rules['character_class'] = character_class
     if submitted_level != 'all' and submitted_level != None:
-        spell_level = request.GET.get('level')
+        spell_level = submitted_level
         value_rules['level'] = spell_level
 
     class_list = CharacterClass.objects.all()
