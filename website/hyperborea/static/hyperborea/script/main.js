@@ -52,6 +52,7 @@ const update_spells = () => {
     .then(response => response.json())
     .then(result => {
         document.querySelector('#page-title').innerHTML = result.page_title;
+        document.title = `Spells of Hyperborea | ${result.page_title}`;
 
         document.querySelector('#spell-list').innerHTML='';
 

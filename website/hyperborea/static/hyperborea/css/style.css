@@ -35,6 +35,10 @@ td, th {
     margin: 15px 0;
 }
 
+.spell-list li a {
+    display: block;
+}
+
 .spellbook-toggle-container {
     text-align: center;
     padding: 0 0 15px 0;
