@@ -43,7 +43,7 @@ const toggle_spellbook = (spell_id) => {
         localStorage.setItem('spellbook', JSON.stringify(spellbook_array));
     }
 
-    setSpellBookButton(spell_id)
+    submitSpellForm()
 };
 
 const setSpellBookButton = (spell_id) => {
@@ -61,20 +61,32 @@ const setSpellBookButton = (spell_id) => {
     return true;
 };
 
+const submitSpellForm = () => {
+        spellbook_json_string = localStorage.getItem('spellbook');
+
+        if (spellbook_json_string === null) {
+            spellbook_json_string = JSON.stringify([]);
+        }
+
+        document.querySelector('#spellbook_field').value = spellbook_json_string;
+
+        document.querySelector('#spell-form').submit();
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
     document.querySelectorAll('#spell-form select').forEach((el)=>{
-        el.addEventListener('change', ()=>{
-            document.querySelector('#spell-form').submit();
+        el.addEventListener('change', () => {
+            submitSpellForm();
         })            
     });
 
     document.querySelectorAll('.spell-list a').forEach((el) => {
-        el.addEventListener('click', (el) => {
-            get_spell_description(el.target.dataset.spell_id)
+        el.addEventListener('click', (e) => {
+            get_spell_description(e.target.dataset.spell_id)
         })
     });
 
-    document.querySelector('#spellbook-toggle-link').addEventListener('click', (el) => {
-        toggle_spellbook(el.target.dataset.spell_id)
+    document.querySelector('#spellbook-toggle-link').addEventListener('click', (e) => {
+        toggle_spellbook(e.target.dataset.spell_id)
     });
 });

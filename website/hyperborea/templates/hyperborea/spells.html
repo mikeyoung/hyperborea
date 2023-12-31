@@ -8,12 +8,17 @@
 <div class='container'>
     <form action='/' method='post' id='spell-form'>
         {% csrf_token %}
+        <input type='hidden' id='spellbook_field' name='spellbook_field'>
         <div class='row'>
             <div class='col-12 col-sm-4 text-center'>
-                <label for='class'>Scope:</label><br>
+                <label for='scope'>Scope:</label><br>
                 <select name='scope' id='scope'>
                     <option value='all'>All Spells</option>
-                    <option value='spellbook'>Spellbook</option>
+                    {% if submitted_scope == 'spellbook' %}
+                        <option value='spellbook' selected='selected'>Spellbook</option>
+                    {% else %}
+                        <option value='spellbook'>Spellbook</option>
+                    {% endif %}
                 </select>
             </div> 
             <div class='col-12 col-sm-4 text-center'>
