@@ -16,7 +16,7 @@ Another goal of the project was to not employ any javascript frameworks or libra
 
 Right now the project is limited to Levels 1-3 and spells A-D.  I am continuing to add data to the app.  Many spells require lists and tables and I did not want to delay the demonstration of the app for the data entry of such a large data set.
 
-WHile using the app with developer tools open one can observe the network activity as the user modifies the specifications for the spell list and spell details.  Since this is all done with ajax endpoints, there is no disruption from a hard page reload.  All of the logic is stored in main.js in the static folder.
+While using the app with developer tools open one can observe the network activity as the user modifies the specifications for the spell list and spell details.  Since this is all done with ajax endpoints, there is no disruption from a hard page reload.  All of the logic is stored in main.js in the static folder.
 
 Future enhancements might include caching ajax responses and other response caching.  Right now the app makes fresh calls for every change and with what will ultimately be a static dataset it presents a prime opportunity for cacheing.
 
