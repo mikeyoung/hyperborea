@@ -4,7 +4,7 @@ Spells of Hyperborea is a tool for browsing an index of the hundreds of spells i
 
 A goal of this project was to balance the strengths of server rendering and client responsiveness.  The rules in Hyperborea are based on the original Dungeons & Dragons system which features multiple spells that are available to multiple character classes at differing levels.  For this reason there is a database table for spells, a table for classes and a junction table for referencing all the combinations of spells, level access and character classes.  Python and Django excel at processing queries from the database so I chose to handle all the filtering logic on the server side.  I opted to make the client fetch filtered lists and individual spell descriptions from the server in order to minimize space complexity on the client.
 
-The spell lists, in all views, list each instance of the spell for each class.  This is intentional so that the results can be filtered and observed to see which classes have access to each spell at various levels.
+The spell lists, in all views, list each instance of the spell for each class.  This is intentional so that the results can be filtered and observed to see which classes have access to each spell at various levels.  The title of each page dynamically reflects the applied filters.
 
 While navigating the site users can select spells to include in their "spellbook".  Spellbook in this context essentially means a favorites list.  I am going to be hosting this app on the internet so I chose to have the spellbook data be stored locally so that the server doesn't have the performance/storage overhead and security risks of public user accounts.
 
@@ -20,3 +20,4 @@ WHile using the app with developer tools open one can observe the network activi
 
 Future enhancements might include caching ajax responses and other response caching.  Right now the app makes fresh calls for every change and with what will ultimately be a static dataset it presents a prime opportunity for cacheing.
 
+Bootstrap 5 was used to create a reponsive layout and for the spell detail modals.
