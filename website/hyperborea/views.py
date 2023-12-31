@@ -5,16 +5,34 @@ import json
 from django.contrib.auth.decorators import login_required
 import os
 from website.settings import BASE_DIR
-
+from django.core import serializers
 
 def spells(request):
     character_class = 'all'
     spell_level = 'all'
     value_rules = {}
-    submitted_spellbook = request.POST.get('spellbook_field')
-    submitted_class = request.POST.get('class')
-    submitted_level = request.POST.get('level')
-    submitted_scope = request.POST.get('scope')
+
+    class_list = CharacterClass.objects.all()
+
+    return render(request, 'hyperborea/spells.html', {
+        'class_list': class_list,
+        'levels': ['1','2','3'],
+    })
+
+def get_spells(request):
+    if request.method != 'POST':
+        return HttpResponseBadRequest()
+    
+    character_class = 'all'
+    spell_level = 'all'
+    value_rules = {}
+
+    submitted_data = json.loads(request.body)
+
+    submitted_spellbook = submitted_data.get('spellbook_json_string')
+    submitted_class = submitted_data.get('character_class')
+    submitted_level = submitted_data.get('level')
+    submitted_scope = submitted_data.get('scope')
 
     if submitted_class != 'all' and submitted_class != None:
         character_class = CharacterClass.objects.get(pk=int(submitted_class))
@@ -31,9 +49,6 @@ def spells(request):
             submitted_spellbook = json.loads(submitted_spellbook)
 
         value_rules['spell__in'] = submitted_spellbook
-
-
-    class_list = CharacterClass.objects.all()
 
     spell_list = SpellListItem.objects.filter(**value_rules).order_by('spell')
 
@@ -52,15 +67,22 @@ def spells(request):
     if submitted_scope == 'spellbook':
         page_title = f'{page_title} in Spellbook'
 
-    return render(request, 'hyperborea/spells.html', {
-        'spell_list': spell_list,
-        'class_list': class_list,
-        'levels': ['1','2','3'],
-        'selected_character_class': character_class,
-        'selected_level': spell_level,
+    returned_spells = []
+
+    for spell in spell_list:
+        returned_spells.append({
+            'name': spell.spell_name,
+            'level': spell.level,
+            'character_class': spell.class_name,
+            'spell_id': spell.spell_id
+        })
+
+    return JsonResponse({
+        'spell_list': returned_spells,
         'page_title': page_title,
-        'submitted_scope': submitted_scope,
     })
+    
+
 
 def get_spell_description(request):
     if request.method != 'POST':

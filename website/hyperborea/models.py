@@ -26,6 +26,14 @@ class SpellListItem(models.Model):
     @property
     def spell_name(self):
         return self.spell.name
+    
+    @property
+    def class_name(self):
+        return self.character_class.name
+    
+    @property
+    def spell_id(self):
+        return self.spell.pk
 
     class Meta:
         constraints = [

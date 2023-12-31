@@ -50,28 +50,10 @@
         </div>
     </form>
 
-    <h3>{{ page_title }}</h3>
+    <h3 id='page-title'></h3>
 
-    <uL class='spell-list text-center'>
-        {% for spell_list_item in spell_list %}
-            {% if selected_character_class == 'all' and selected_level == 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}<br>({{spell_list_item.character_class|capfirst}} Level {{spell_list_item.level}})</a></li>
-            {% endif %}
-            
-            {% if selected_character_class == 'all' and selected_level != 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}<br>({{spell_list_item.character_class|capfirst}})</a></li>
-            {% endif %}
-            
-            {% if selected_character_class != 'all' and selected_level == 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}<br>(Level {{spell_list_item.level}})</a></li>
-            {% endif %}
-
-            {% if selected_character_class != 'all' and selected_level != 'all' %}
-               <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}</a></li>
-            {% endif %}
-        {% empty %}
-            <p>No spells match selected specifications.</p>
-        {% endfor %}
+    <div id='feedback'></div>
+    <uL id='spell-list' class='spell-list text-center'>
     </uL>
 </div>
 {% endblock %}
