@@ -69,6 +69,8 @@
             {% if selected_character_class != 'all' and selected_level != 'all' %}
                <li><a href='javascript:void(0)' data-spell_id='{{spell_list_item.spell.pk}}'>{{ spell_list_item.spell.name }}</a></li>
             {% endif %}
+        {% empty %}
+            <p>No spells match selected specifications.</p>
         {% endfor %}
     </uL>
 </div>
