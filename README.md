@@ -6,11 +6,11 @@ A goal of this project was to balance the strengths of server rendering and clie
 
 The spell lists, in all views, list each instance of the spell for each class.  This is intentional so that the results can be filtered and observed to see which classes have access to each spell at various levels.  The title of each page dynamically reflects the applied filters.
 
-While navigating the site users can select spells to include in their "spellbook".  Spellbook in this context essentially means a favorites list.  I am going to be hosting this app on the internet so I chose to have the spellbook data be stored locally so that the server doesn't have the performance/storage overhead and security risks of public user accounts.
+While navigating the site users can select spells to include in their "spellbook".  Spellbook in this context essentially means a favorites list.  I am going to be hosting this app on the internet so I chose to have the spellbook data be stored locally so that the server doesn't have the performance/storage overhead and security risks of public user accounts.  The spellbook data is populated into a hidden field in the main spell form prior to requests to fetch spell lists.
 
 I also created an endpoint that is only accessible to the logged in admin user which will generate json file dumps of the three tables, so that in the future a pure client side app can run off static data.  None of these files are utilized in the current form of the app but the files are included in the static folder.
 
-I decided to use a typeface and color scheme that is reminiscent of the pulp sources for the Hyperborea setting.  There is noticeable font-replacement because the font is loaded in a non-blockin manner so that the page content can render quickly for all users.
+I decided to use a typeface and color scheme that is reminiscent of the pulp sources for the Hyperborea setting.  There is noticeable font-replacement because the font is loaded in a non-blocking manner so that the page content can render quickly for all users.
 
 Another goal of the project was to not employ any javascript frameworks or libraries.  This did require some manual updating of the dom in cases where a library could have provided binding, but I favored delivering a smaller codebase and eliminating dependence on projects that have extensive dependencies which often need security updates.  If the application's UI were to get significantly more complex I would likely look into coverting some of the functionality to use VueJS.
 
