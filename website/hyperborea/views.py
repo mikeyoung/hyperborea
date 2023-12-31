@@ -71,9 +71,9 @@ def get_spells(request):
 
     for spell in spell_list:
         returned_spells.append({
-            'name': spell.spell_name,
+            'name': spell.spell_name.capitalize(),
             'level': spell.level,
-            'character_class': spell.class_name,
+            'character_class': spell.class_name.capitalize(),
             'spell_id': spell.spell_id
         })
 
