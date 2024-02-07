@@ -69,12 +69,4 @@ This file contains the following view functions:
 
 * create_json: Generates JSON data dumps of the main tables.  Requires admin login.
 
-### hyperborea/static/hyperborea/json/character_classes.json
-A data dump for all classes, to be used by javascript in future functionality.
-
-### hyperborea/static/hyperborea/json/spell_list_itemss.json
-A data dump for all spell lists, to be used by javascript in future functionality.
-
-### hyperborea/static/hyperborea/json/spells.json
-A data dump for all spell, to be used by javascript in future functionality.
 
