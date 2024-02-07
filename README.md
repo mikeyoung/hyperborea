@@ -1,7 +1,12 @@
 # Spells of Hyperborea
 
-Spells of Hyperborea is a tool for browsing an index of the hundreds of spells in the role playing game Hyperborea.  All code written for the application was distinct from all previous projects in CS50W.  The app is designed to be a part of a set of upcoming apps that will aid play in various ways such as character management, in-game weather conditions, etc.  While the end user experience has been crafted to be simple, the back end employs a significant amount of logic to produce expected behavior.
+## Introduction
+Spells of Hyperborea is a tool for browsing an index of the hundreds of spells in the role playing game Hyperborea.  The app is designed to be a part of a set of upcoming apps that will aid play in various ways such as character management, in-game weather conditions, etc.  While the end user experience has been crafted to be simple, the back end employs a significant amount of logic to produce expected behavior.
 
+## Distinctiveness and Complexity
+All code written for the application is distinct from all previous projects I submitted for CS50W.  
+
+## Application Design
 A goal of this project was to balance the strengths of server rendering and client responsiveness.  The rules in Hyperborea are based on the original Dungeons & Dragons system which features multiple spells that are available to multiple character classes at differing levels.  For this reason there is a database table for spells, a table for classes and a junction table for referencing all the combinations of spells, level access and character classes.  Python and Django excel at processing queries from the database so I chose to handle all the filtering logic on the server side.  I opted to make the client fetch filtered lists and individual spell descriptions from the server in order to minimize space complexity on the client.
 
 The spell lists, in all views, list each instance of the spell for each class.  This is intentional so that the results can be filtered and observed to see which classes have access to each spell at various levels.  The title of each page dynamically reflects the applied filters.
