@@ -7,7 +7,8 @@ Spells of Hyperborea is a tool for browsing an index of the hundreds of spells i
 All code written for the application is distinct from previous projects I submitted for CS50W.  There is no other project in the course that functions as a means to view and organize related game system elements into a user defined collection (in this case a spellbook).  Complexities that were new to this project include the use of a junction table and performing content filtration driven by data from both the database and client local storage.  The rules in Hyperborea are based on the original Dungeons & Dragons system which features multiple spells that are available to multiple character classes at differing levels.  For this reason there is a database table for spells, a table for classes and a junction table for referencing all the combinations of spells, level access and character classes.  The UI is also a significant step up with a responsive layout and elegant modals for spell details.
 
 ## How To Run
-Assuming installation of python 3.10+ and Django: Navigate to application folder with manage.py use manage.py runserver
+Assuming installation of python 3.10+ and Django: Navigate to application folder with manage.py and enter `python manage.py runserver`.
+In your favorite browser navigate to http://127.0.0.1:8000/
 
 ## Application Design
 Python and Django excel at easily processing queries from the database so I chose to handle all the filtering logic on the server side.  I opted to make the client fetch filtered lists and individual spell descriptions from the server in order to minimize space requirements on the client (there are close to a thousand spells in the game, some of which are several paragraphs).
